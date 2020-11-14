@@ -28,11 +28,11 @@ class CustomGLSurfaceView(context: Context) : GLSurfaceView(context) {
 
         performClick()
 
-        val positionX = event?.x
-        val positionY = event?.y
+        val positionX = (event?.x?.minus(540))?.div(-540)
+        val positionY = (event?.y?.minus(960))?.div(-960)
 
-        if (positionX?.compareTo(540)!! == -1){
-            if (positionY?.compareTo(960)!! == -1){
+        if (positionX?.compareTo(0)!! ==1){
+            if (positionY?.compareTo(0)!! == 1){
                 Snake.segments.forEach() {
                     it.changePosition(it.centerX + 0.005f, it.centerY + 0.005f, it.centerZ)
                 }
@@ -42,7 +42,7 @@ class CustomGLSurfaceView(context: Context) : GLSurfaceView(context) {
                 }
             }
         } else {
-            if (positionY?.compareTo(960)!! == -1){
+            if (positionY?.compareTo(0)!! == 1){
                 Snake.segments.forEach() {
                     it.changePosition(it.centerX - 0.005f, it.centerY + 0.005f, it.centerZ)
                 }
