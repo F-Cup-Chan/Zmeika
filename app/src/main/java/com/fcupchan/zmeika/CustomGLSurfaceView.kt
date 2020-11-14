@@ -22,10 +22,6 @@ class CustomGLSurfaceView(context: Context) : GLSurfaceView(context) {
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
 
-//        Snake.segments.forEach() {
-//            it.changePosition(it.centerX - 0.05f, it.centerY + 0.05f, it.centerZ)
-//        }
-
         performClick()
 
         val positionX = (event?.x?.minus(540))?.div(-540)
@@ -33,21 +29,21 @@ class CustomGLSurfaceView(context: Context) : GLSurfaceView(context) {
 
         if (positionX?.compareTo(0)!! ==1){
             if (positionY?.compareTo(0)!! == 1){
-                Snake.segments.forEach() {
+                Snake.segments.forEach{
                     it.changePosition(it.centerX + 0.005f, it.centerY + 0.005f, it.centerZ)
                 }
             } else {
-                Snake.segments.forEach() {
+                Snake.segments.forEach{
                     it.changePosition(it.centerX + 0.005f, it.centerY - 0.005f, it.centerZ)
                 }
             }
         } else {
             if (positionY?.compareTo(0)!! == 1){
-                Snake.segments.forEach() {
+                Snake.segments.forEach{
                     it.changePosition(it.centerX - 0.005f, it.centerY + 0.005f, it.centerZ)
                 }
             } else {
-                Snake.segments.forEach() {
+                Snake.segments.forEach{
                     it.changePosition(it.centerX - 0.005f, it.centerY - 0.005f, it.centerZ)
                 }
             }
