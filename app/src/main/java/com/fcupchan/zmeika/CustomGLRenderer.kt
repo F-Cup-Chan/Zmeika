@@ -18,7 +18,7 @@ class CustomGLRenderer : GLSurfaceView.Renderer{
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
         GLES30.glClearColor(0.0f, 1.0f, 0.815686f, 1.0f)
 
-        Snake.segments.add(Segment(0.74f, -1.3f, 1f))
+        Snake.segments.add(Segment(0.4f, -1.29f, 1f))
 //        Snake.segments.add(Segment(0.0f, -1f, 1f))
 //        Snake.segments.add(Segment(0.7f, 0.3f, 1f))
 //        Snake.segments.add(Segment(0.4f, -1.1f, 1f))
@@ -66,6 +66,13 @@ class CustomGLRenderer : GLSurfaceView.Renderer{
 //            }  else if (it.directionX == Direction.LEFT.toString() && it.directionY == Direction.DOWN.toString()){
 //                it.changePosition(it.centerX - beta4, it.centerY - beta4, it.centerZ)
 //            }
+            when(it.direction){
+                Direction.RIGHT.toString() -> it.changePosition(it.centerX - 0.01f, it.centerY, it.centerZ)
+                Direction.LEFT.toString() -> it.changePosition(it.centerX + 0.01f, it.centerY, it.centerZ)
+                Direction.UP.toString() -> it.changePosition(it.centerX, it.centerY + 0.01f, it.centerZ)
+                Direction.DOWN.toString() -> it.changePosition(it.centerX, it.centerY - 0.01f, it.centerZ)
+            }
+
             it.draw(vPMatrix)
         }
     }
