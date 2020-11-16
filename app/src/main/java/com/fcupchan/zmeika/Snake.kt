@@ -6,7 +6,4 @@ class Snake {
         var direction: String = Direction.RIGHT.toString()
         var isGameRunning = true
     }
-
-
-
 }

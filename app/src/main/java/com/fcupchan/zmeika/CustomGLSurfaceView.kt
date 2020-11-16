@@ -16,79 +16,40 @@ class CustomGLSurfaceView(context: Context) : GLSurfaceView(context) {
         //renderMode = GLSurfaceView.RENDERMODE_WHEN_DIRTY
     }
 
-    override fun performClick(): Boolean {
-        return super.performClick()
-    }
-
     override fun onTouchEvent(event: MotionEvent?): Boolean {
 
-        performClick()
+        super.performClick()
 
         val positionX = (event?.x?.minus(540))?.div(-540)
         val positionY = (event?.y?.minus(960))?.div(-960)
-
-//        if (positionX?.compareTo(0)!! ==1){
-//            if (positionY?.compareTo(0)!! == 1){
-//                Snake.segments.forEach{
-//                    it.changePosition(it.centerX + 0.005f, it.centerY + 0.005f, it.centerZ)
-//                }
-//            } else {
-//                Snake.segments.forEach{
-//                    it.changePosition(it.centerX + 0.005f, it.centerY - 0.005f, it.centerZ)
-//                }
-//            }
-//        } else {
-//            if (positionY?.compareTo(0)!! == 1){
-//                Snake.segments.forEach{
-//                    it.changePosition(it.centerX - 0.005f, it.centerY + 0.005f, it.centerZ)
-//                }
-//            } else {
-//                Snake.segments.forEach{
-//                    it.changePosition(it.centerX - 0.005f, it.centerY - 0.005f, it.centerZ)
-//                }
-//            }
-//        }
-
 
         when {
             positionY?.compareTo(0.65)  == 1 -> {
                 Snake.segments.forEach{
                     if (it.direction != Direction.DOWN.toString()){
-                        //it.changePosition(it.centerX, it.centerY + 0.01f, it.centerZ)
                         it.direction = Direction.UP.toString()
                     }
-//                    it.changePosition(it.centerX, it.centerY + 0.01f, it.centerZ)
-//                    it.direction = Direction.UP.toString()
                 }
             }
             positionY?.compareTo(-0.65)  == -1 -> {
                 Snake.segments.forEach{
                     if (it.direction != Direction.UP.toString()){
-                        //it.changePosition(it.centerX, it.centerY - 0.01f, it.centerZ)
                         it.direction = Direction.DOWN.toString()
                     }
-//                    it.changePosition(it.centerX, it.centerY - 0.01f, it.centerZ)
-//                    it.direction = Direction.DOWN.toString()
                 }
             }
             positionX?.compareTo(0.35) == 1 -> {
                 Snake.segments.forEach{
                     if (it.direction != Direction.RIGHT.toString()){
-                        //it.changePosition(it.centerX + 0.01f, it.centerY, it.centerZ)
                         it.direction = Direction.LEFT.toString()
                     }
-//                    it.changePosition(it.centerX + 0.01f, it.centerY, it.centerZ)
-//                    it.direction = Direction.LEFT.toString()
                 }
             }
             positionX?.compareTo(-0.35) == -1 -> {
                 Snake.segments.forEach{
                     if (it.direction != Direction.LEFT.toString()){
-                        //it.changePosition(it.centerX - 0.01f, it.centerY, it.centerZ)
                         it.direction = Direction.RIGHT.toString()
                     }
-//                    it.changePosition(it.centerX - 0.01f, it.centerY, it.centerZ)
-//                    it.direction = Direction.RIGHT.toString()
                 }
             }
             else -> {
@@ -100,7 +61,6 @@ class CustomGLSurfaceView(context: Context) : GLSurfaceView(context) {
                 }
             }
         }
-
 
         return true
     }

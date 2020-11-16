@@ -56,28 +56,8 @@ class Segment(positionX: Float, positionY: Float, positionZ: Float) {
         triangle1.changePosition(floatArrayOf(X1, Y1, Z1, X2, Y2, Z2, X3, Y3, Z3))
         triangle2.changePosition(floatArrayOf(X2, Y2, Z2, X3, Y3, Z3, X4, Y4, Z4))
 
-        if (positionX.compareTo(0.72) == 1 || positionX.compareTo(-0.72) == -1 || positionY.compareTo(1.29) == 1 || positionY.compareTo(-1.29) == -1){
+        if (positionX.compareTo(0.71) == 1 || positionX.compareTo(-0.71) == -1 || positionY.compareTo(1.31) == 1 || positionY.compareTo(-1.31) == -1){
             Snake.isGameRunning = false
         }
     }
-
-//    fun checkPosition() {
-//        if (directionX == Direction.RIGHT.toString() && centerX >= 0.74f) {
-//            directionX = Direction.LEFT.toString()
-//            return
-//        }
-//        if (directionX == Direction.LEFT.toString() && centerX <= -0.74f) {
-//            directionX = Direction.RIGHT.toString()
-//            return
-//        }
-//        if (directionY == Direction.UP.toString() && centerY >= 1.31f) {
-//            directionY = Direction.DOWN.toString()
-//            return
-//        }
-//        if (directionY == Direction.DOWN.toString() && centerY <= -1.31f) {
-//            directionY = Direction.UP.toString()
-//            return
-//        }
-//    }
-
 }

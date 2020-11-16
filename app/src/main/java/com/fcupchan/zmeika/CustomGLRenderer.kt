@@ -11,14 +11,14 @@ import java.util.Random
 private val vPMatrix = FloatArray(16)
 private val projectionMatrix = FloatArray(16)
 private val viewMatrix = FloatArray(16)
-private val random: Random = Random()
+private var frameSkipCounter = 20
 
 
 class CustomGLRenderer : GLSurfaceView.Renderer{
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
         GLES30.glClearColor(0.0f, 1.0f, 0.815686f, 1.0f)
 
-        Snake.segments.add(Segment(0.4f, -1.29f, 1f))
+        Snake.segments.add(Segment(0.4f, -1.3f, 1f))
 //        Snake.segments.add(Segment(0.0f, -1f, 1f))
 //        Snake.segments.add(Segment(0.7f, 0.3f, 1f))
 //        Snake.segments.add(Segment(0.4f, -1.1f, 1f))
@@ -51,29 +51,32 @@ class CustomGLRenderer : GLSurfaceView.Renderer{
 
         Matrix.multiplyMM(vPMatrix, 0, projectionMatrix, 0, viewMatrix, 0)
 
-        Snake.segments.forEach{
-//            it.checkPosition()
-//            var beta = random.nextFloat() / 15f
-//            var beta2 = random.nextFloat() / 15f
-//            var beta3 = random.nextFloat() / 15f
-//            var beta4 = random.nextFloat() / 15f
-//            if (it.directionX == Direction.RIGHT.toString() && it.directionY == Direction.UP.toString()){
-//                it.changePosition(it.centerX + beta, it.centerY + beta, it.centerZ)
-//            } else if (it.directionX == Direction.RIGHT.toString() && it.directionY == Direction.DOWN.toString()){
-//                it.changePosition(it.centerX + beta2, it.centerY - beta2, it.centerZ)
-//            }  else if (it.directionX == Direction.LEFT.toString() && it.directionY == Direction.UP.toString()){
-//                it.changePosition(it.centerX - beta3, it.centerY + beta3, it.centerZ)
-//            }  else if (it.directionX == Direction.LEFT.toString() && it.directionY == Direction.DOWN.toString()){
-//                it.changePosition(it.centerX - beta4, it.centerY - beta4, it.centerZ)
-//            }
-            when(it.direction){
-                Direction.RIGHT.toString() -> it.changePosition(it.centerX - 0.01f, it.centerY, it.centerZ)
-                Direction.LEFT.toString() -> it.changePosition(it.centerX + 0.01f, it.centerY, it.centerZ)
-                Direction.UP.toString() -> it.changePosition(it.centerX, it.centerY + 0.01f, it.centerZ)
-                Direction.DOWN.toString() -> it.changePosition(it.centerX, it.centerY - 0.01f, it.centerZ)
-            }
+        if (frameSkipCounter == 20){
+            Snake.segments.forEach{
+                when(it.direction){
+                    Direction.RIGHT.toString() -> it.changePosition(it.centerX - 0.1f, it.centerY, it.centerZ)
+                    Direction.LEFT.toString() -> it.changePosition(it.centerX + 0.1f, it.centerY, it.centerZ)
+                    Direction.UP.toString() -> it.changePosition(it.centerX, it.centerY + 0.1f, it.centerZ)
+                    Direction.DOWN.toString() -> it.changePosition(it.centerX, it.centerY - 0.1f, it.centerZ)
+                }
 
-            it.draw(vPMatrix)
+                it.draw(vPMatrix)
+            }
+            frameSkipCounter = 0
+        } else {
+            Snake.segments.forEach{
+                when(it.direction){
+                    Direction.RIGHT.toString() -> it.changePosition(it.centerX , it.centerY, it.centerZ)
+                    Direction.LEFT.toString() -> it.changePosition(it.centerX, it.centerY, it.centerZ)
+                    Direction.UP.toString() -> it.changePosition(it.centerX, it.centerY, it.centerZ)
+                    Direction.DOWN.toString() -> it.changePosition(it.centerX, it.centerY, it.centerZ)
+                }
+
+                it.draw(vPMatrix)
+            }
         }
+
+        frameSkipCounter++
+
     }
 }
