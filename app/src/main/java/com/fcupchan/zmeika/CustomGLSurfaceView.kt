@@ -10,7 +10,7 @@ class CustomGLSurfaceView(context: Context) : GLSurfaceView(context) {
     private val renderer: CustomGLRenderer
 
     init {
-        setEGLContextClientVersion(3)
+        setEGLContextClientVersion(2)
         renderer = CustomGLRenderer()
         setRenderer(renderer)
         //renderMode = GLSurfaceView.RENDERMODE_WHEN_DIRTY

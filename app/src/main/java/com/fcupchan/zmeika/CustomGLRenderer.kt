@@ -13,26 +13,15 @@ private val projectionMatrix = FloatArray(16)
 private val viewMatrix = FloatArray(16)
 private var frameSkipCounter = 20
 
+private var food: Food = Food(0f, 0f, 0f)
+
 
 class CustomGLRenderer : GLSurfaceView.Renderer{
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
         GLES30.glClearColor(0.0f, 1.0f, 0.815686f, 1.0f)
 
         Snake.segments.add(Segment(0.4f, -1.3f, 1f))
-//        Snake.segments.add(Segment(0.0f, -1f, 1f))
-//        Snake.segments.add(Segment(0.7f, 0.3f, 1f))
-//        Snake.segments.add(Segment(0.4f, -1.1f, 1f))
-//        Snake.segments.add(Segment(0.34f, 0.8f, 1f))
-//        Snake.segments.add(Segment(0.58f, -0.1f, 1f))
-//        Snake.segments.add(Segment(0.8f, -0.1f, 1f))
-//        Snake.segments.add(Segment(0.53f, -0.7f, 1f))
-//        Snake.segments.add(Segment(-0.58f, 0.1f, 1f))
-//        Snake.segments.add(Segment(-0.8f, 1.1f, 1f))
-//        Snake.segments.add(Segment(-0.34f, 0.1f, 1f))
-//        Snake.segments.add(Segment(-0.12f, -0.1f, 1f))
-//        Snake.segments.add(Segment(0.28f, -1.1f, 1f))
-//        Snake.segments.add(Segment(-0.87f, -0.6f, 1f))
-//        Snake.segments.add(Segment(-0.17f, -0.2f, 1f))
+        food.createFood()
     }
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
@@ -75,6 +64,10 @@ class CustomGLRenderer : GLSurfaceView.Renderer{
                 it.draw(vPMatrix)
             }
         }
+
+
+        if (!food.isFoodExists) food.createFood()
+        food.drawFood(vPMatrix)
 
         frameSkipCounter++
 

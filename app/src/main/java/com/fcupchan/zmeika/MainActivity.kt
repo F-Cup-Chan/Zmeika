@@ -22,18 +22,5 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(mainView)
 
-        //val snake: Snake
-    }
-
-    fun toast(key: Int){
-        val string: String = when(key){
-            1 -> "LEFT UP"
-            2 -> "RIGHT UP"
-            3 -> "LEFT DOWN"
-            4 -> "RIGHT DOWN"
-            else -> "unknown"
-        }
-
-        Toast.makeText(this, string, Toast.LENGTH_SHORT).show()
     }
 }

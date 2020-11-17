@@ -28,7 +28,7 @@ class Triangle(X1: Float, Y1: Float, Z1: Float,
     private val COORDS_PER_VERTEX = 3
     var triangleCoords = floatArrayOf(X1, Y1, Z1, X2, Y2, Z2, X3, Y3, Z3)
 
-    val color = floatArrayOf(0.63671875f, 0.76953125f, 0.22265625f, 1.0f)
+    val color = floatArrayOf(1f, 0f, 0f, 1.0f)
 
     private var mProgram: Int
 
@@ -46,8 +46,6 @@ class Triangle(X1: Float, Y1: Float, Z1: Float,
 
             GLES30.glLinkProgram(it)
         }
-
-
     }
 
     private var vertexBuffer: FloatBuffer = ByteBuffer.allocateDirect(triangleCoords.size * 4).run {
