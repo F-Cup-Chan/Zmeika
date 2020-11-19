@@ -13,15 +13,14 @@ private val projectionMatrix = FloatArray(16)
 private val viewMatrix = FloatArray(16)
 private var frameSkipCounter = 20
 
-private var food: Food = Food(0f, 0f, 0f)
 
 
 class CustomGLRenderer : GLSurfaceView.Renderer{
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
         GLES30.glClearColor(0.0f, 1.0f, 0.815686f, 1.0f)
 
-        Snake.segments.add(Segment(0.4f, -1.3f, 1f))
-        food.createFood()
+        Snake.segments.add(Segment(0.7f, 0f, 1f))
+        Food.createFood()
     }
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
@@ -42,6 +41,14 @@ class CustomGLRenderer : GLSurfaceView.Renderer{
 
         if (frameSkipCounter == 20){
             Snake.segments.forEach{
+
+                if (Snake.segments[0].centerX.compareTo(Food.positionFoodX) == 0 && Snake.segments[0].centerY.compareTo(Food.positionFoodY) == 0){
+                    Snake.addSegment()
+                    if (Snake.segments.size != 1) Snake.isGameRunning = false
+                    Food.createFood()
+                    Food.drawFood(vPMatrix)
+                }
+
                 when(it.direction){
                     Direction.RIGHT.toString() -> it.changePosition(it.centerX - 0.1f, it.centerY, it.centerZ)
                     Direction.LEFT.toString() -> it.changePosition(it.centerX + 0.1f, it.centerY, it.centerZ)
@@ -54,22 +61,13 @@ class CustomGLRenderer : GLSurfaceView.Renderer{
             frameSkipCounter = 0
         } else {
             Snake.segments.forEach{
-                when(it.direction){
-                    Direction.RIGHT.toString() -> it.changePosition(it.centerX , it.centerY, it.centerZ)
-                    Direction.LEFT.toString() -> it.changePosition(it.centerX, it.centerY, it.centerZ)
-                    Direction.UP.toString() -> it.changePosition(it.centerX, it.centerY, it.centerZ)
-                    Direction.DOWN.toString() -> it.changePosition(it.centerX, it.centerY, it.centerZ)
-                }
-
                 it.draw(vPMatrix)
             }
         }
 
-
-        if (!food.isFoodExists) food.createFood()
-        food.drawFood(vPMatrix)
+        //if (!Food.isFoodExists) Food.createFood()
+        Food.drawFood(vPMatrix)
 
         frameSkipCounter++
-
     }
 }

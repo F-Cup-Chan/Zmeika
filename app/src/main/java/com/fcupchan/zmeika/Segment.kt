@@ -40,18 +40,18 @@ class Segment(positionX: Float, positionY: Float, positionZ: Float) {
         centerX = positionX
         centerY = positionY
         centerZ = positionZ
-        X1 = positionX + 0.05f
-        X2 = positionX - 0.05f
-        X3 = positionX + 0.05f
-        X4 = positionX - 0.05f
-        Y1 = positionY + 0.05f
-        Y2 = positionY + 0.05f
-        Y3 = positionY - 0.05f
-        Y4 = positionY - 0.05f
-        Z1 = positionZ
-        Z2 = positionZ
-        Z3 = positionZ
-        Z4 = positionZ
+        X1 = centerX + 0.05f
+        X2 = centerX - 0.05f
+        X3 = centerX + 0.05f
+        X4 = centerX - 0.05f
+        Y1 = centerY + 0.05f
+        Y2 = centerY + 0.05f
+        Y3 = centerY - 0.05f
+        Y4 = centerY - 0.05f
+        Z1 = centerZ
+        Z2 = centerZ
+        Z3 = centerZ
+        Z4 = centerZ
 
         triangle1.changePosition(floatArrayOf(X1, Y1, Z1, X2, Y2, Z2, X3, Y3, Z3))
         triangle2.changePosition(floatArrayOf(X2, Y2, Z2, X3, Y3, Z3, X4, Y4, Z4))
