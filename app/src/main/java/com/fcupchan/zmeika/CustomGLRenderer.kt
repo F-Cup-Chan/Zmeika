@@ -19,7 +19,7 @@ class CustomGLRenderer : GLSurfaceView.Renderer{
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
         GLES30.glClearColor(0.0f, 1.0f, 0.815686f, 1.0f)
 
-        Snake.segments.add(Segment(0.7f, 0f, 1f))
+        Snake.segments.add(Segment(0.3f, 0f, 1f))
         Food.createFood()
     }
 
@@ -42,7 +42,7 @@ class CustomGLRenderer : GLSurfaceView.Renderer{
         if (frameSkipCounter == 20){
             Snake.segments.forEach{
 
-                if (Snake.segments[0].centerX.compareTo(Food.positionFoodX) == 0 && Snake.segments[0].centerY.compareTo(Food.positionFoodY) == 0){
+                if (Snake.segments[0].centerX.compareTo(0) == 0 && Snake.segments[0].centerY.compareTo(0) == 0){
                     Snake.addSegment()
                     if (Snake.segments.size != 1) Snake.isGameRunning = false
                     Food.createFood()
