@@ -110,7 +110,6 @@ class Triangle(X1: Float, Y1: Float, Z1: Float,
         // Draw the triangle
         GLES30.glDrawArrays(GLES30.GL_TRIANGLES, 0, vertexCount)
 
-        // Disable vertex array
         GLES30.glDisableVertexAttribArray(positionHandle)
     }
 
