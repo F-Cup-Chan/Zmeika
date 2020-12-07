@@ -106,7 +106,6 @@ class Triangle(X1: Float, Y1: Float, Z1: Float,
 
         // Pass the projection and view transformation to the shader
         GLES30.glUniformMatrix4fv(vPMatrixHandle, 1, false, mvpMatrix, 0)
-
         // Draw the triangle
         GLES30.glDrawArrays(GLES30.GL_TRIANGLES, 0, vertexCount)
 
