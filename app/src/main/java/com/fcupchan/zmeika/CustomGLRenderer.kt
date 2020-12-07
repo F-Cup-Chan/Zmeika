@@ -3,23 +3,25 @@ package com.fcupchan.zmeika
 import android.opengl.GLES30
 import android.opengl.GLSurfaceView
 import android.opengl.Matrix
-import android.os.SystemClock
+import java.math.BigDecimal
+import java.math.RoundingMode
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
-import java.util.Random
 
 private val vPMatrix = FloatArray(16)
 private val projectionMatrix = FloatArray(16)
 private val viewMatrix = FloatArray(16)
-private var frameSkipCounter = 20
 
 
 
 class CustomGLRenderer : GLSurfaceView.Renderer{
+    
+    private var frameSkipCounter = 0
+
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
         GLES30.glClearColor(0.0f, 1.0f, 0.815686f, 1.0f)
 
-        Snake.segments.add(Segment(0.3f, 0f, 1f))
+        Snake.segments.add(Segment(0.7f, 00.2f, 1f))
         Food.createFood()
     }
 
@@ -39,15 +41,15 @@ class CustomGLRenderer : GLSurfaceView.Renderer{
 
         Matrix.multiplyMM(vPMatrix, 0, projectionMatrix, 0, viewMatrix, 0)
 
+        atChange()
+    }
+
+    private fun atChange(){
+
+        var needNewSegment = false
+
         if (frameSkipCounter == 20){
             Snake.segments.forEach{
-
-                if (Snake.segments[0].centerX.compareTo(0) == 0 && Snake.segments[0].centerY.compareTo(0) == 0){
-                    Snake.addSegment()
-                    if (Snake.segments.size != 1) Snake.isGameRunning = false
-                    Food.createFood()
-                    Food.drawFood(vPMatrix)
-                }
 
                 when(it.direction){
                     Direction.RIGHT.toString() -> it.changePosition(it.centerX - 0.1f, it.centerY, it.centerZ)
@@ -56,16 +58,33 @@ class CustomGLRenderer : GLSurfaceView.Renderer{
                     Direction.DOWN.toString() -> it.changePosition(it.centerX, it.centerY - 0.1f, it.centerZ)
                 }
 
+                val centerX = BigDecimal.valueOf(it.centerX.toDouble()).setScale(1, RoundingMode.HALF_EVEN).toFloat()
+                val centerY = BigDecimal.valueOf(it.centerY.toDouble()).setScale(1, RoundingMode.HALF_EVEN).toFloat()
+                val centerFoodX = BigDecimal.valueOf(Food.positionFoodX.toDouble()).setScale(1, RoundingMode.HALF_EVEN).toFloat()
+                val centerFoodY = BigDecimal.valueOf(Food.positionFoodY.toDouble()).setScale(1, RoundingMode.HALF_EVEN).toFloat()
+
+                if (centerX == centerFoodX && centerY == centerFoodY){
+                    needNewSegment = true
+                }
+
                 it.draw(vPMatrix)
+
+                //it.changeColor(floatArrayOf(1.0f, 1.0f, 1.0f, 1.0f))
             }
+
+            if (needNewSegment){
+                Snake.addSegment()
+                Food.createFood()
+            }
+
             frameSkipCounter = 0
         } else {
+
             Snake.segments.forEach{
                 it.draw(vPMatrix)
             }
         }
 
-        //if (!Food.isFoodExists) Food.createFood()
         Food.drawFood(vPMatrix)
 
         frameSkipCounter++

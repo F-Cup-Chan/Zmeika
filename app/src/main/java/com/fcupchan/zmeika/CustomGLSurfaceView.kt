@@ -19,7 +19,6 @@ class CustomGLSurfaceView(context: Context) : GLSurfaceView(context) {
     override fun onTouchEvent(event: MotionEvent?): Boolean {
 
         super.performClick()
-
         val positionX = (event?.x?.minus(540))?.div(-540)
         val positionY = (event?.y?.minus(960))?.div(-960)
 

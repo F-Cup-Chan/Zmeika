@@ -60,4 +60,9 @@ class Segment(positionX: Float, positionY: Float, positionZ: Float) {
             Snake.isGameRunning = false
         }
     }
+
+    fun changeColor(newColor: FloatArray){
+        triangle1.changeColor(newColor)
+        triangle2.changeColor(newColor)
+    }
 }

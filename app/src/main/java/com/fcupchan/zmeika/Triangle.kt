@@ -28,7 +28,7 @@ class Triangle(X1: Float, Y1: Float, Z1: Float,
     private val COORDS_PER_VERTEX = 3
     var triangleCoords = floatArrayOf(X1, Y1, Z1, X2, Y2, Z2, X3, Y3, Z3)
 
-    val color = floatArrayOf(1f, 0f, 0f, 1.0f)
+    private val color = floatArrayOf(1f, 0f, 0f, 1.0f)
 
     private var mProgram: Int
 
@@ -127,6 +127,14 @@ class Triangle(X1: Float, Y1: Float, Z1: Float,
     fun changePosition(newPosition: FloatArray){
         vertexBuffer.put(newPosition)
         vertexBuffer.position(0)
+    }
+
+    fun changeColor(newColor: FloatArray){
+        mColorHandle = GLES30.glGetUniformLocation(mProgram, "vColor").also { colorHandle ->
+
+            // Set color for drawing the triangle
+            GLES30.glUniform4fv(colorHandle, 1, newColor, 0)
+        }
     }
 
 

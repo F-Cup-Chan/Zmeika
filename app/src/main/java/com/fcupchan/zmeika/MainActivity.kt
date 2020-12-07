@@ -5,11 +5,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Window
 import android.view.WindowManager
+import android.widget.TextView
 import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var mainView :GLSurfaceView
+
+    lateinit var field: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,6 +24,5 @@ class MainActivity : AppCompatActivity() {
         mainView = CustomGLSurfaceView(this)
 
         setContentView(mainView)
-
     }
 }
