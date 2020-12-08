@@ -102,8 +102,6 @@ class Triangle(X1: Float, Y1: Float, Z1: Float,
     private fun loadShader(type: Int, shaderCode: String): Int {
 
         return GLES30.glCreateShader(type).also { shader ->
-
-            // add the source code to the shader and compile it
             GLES30.glShaderSource(shader, shaderCode)
             GLES30.glCompileShader(shader)
         }
