@@ -69,7 +69,7 @@ class CustomGLRenderer : GLSurfaceView.Renderer{
 
                 it.draw(vPMatrix)
 
-                //it.changeColor(floatArrayOf(1.0f, 1.0f, 1.0f, 1.0f))
+                it.changeColor(floatArrayOf(1.0f, 1.0f, 1.0f, 1.0f))
             }
 
             if (needNewSegment){

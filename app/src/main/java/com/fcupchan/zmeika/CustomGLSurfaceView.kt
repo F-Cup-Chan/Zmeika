@@ -10,7 +10,7 @@ class CustomGLSurfaceView(context: Context) : GLSurfaceView(context) {
     private val renderer: CustomGLRenderer
 
     init {
-        setEGLContextClientVersion(2)
+        setEGLContextClientVersion(3) // should(?) be 2
         renderer = CustomGLRenderer()
         setRenderer(renderer)
         //renderMode = GLSurfaceView.RENDERMODE_WHEN_DIRTY
@@ -54,8 +54,8 @@ class CustomGLSurfaceView(context: Context) : GLSurfaceView(context) {
             else -> {
                 if (!Snake.isGameRunning){
                     Snake.segments.clear()
-                    Snake.segments.add(Segment(0f, 0f, 1f))
                     Snake.isGameRunning = true
+                    Snake.segments.add(Segment(0f, 0f, 1f))
                 }
             }
         }

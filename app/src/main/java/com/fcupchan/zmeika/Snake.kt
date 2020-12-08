@@ -2,7 +2,7 @@ package com.fcupchan.zmeika
 
 class Snake {
     companion object{
-        var counter = 0f
+        private var counter = 0f
 
         var segments = arrayListOf<Segment>()
         //var direction: String = Direction.RIGHT.toString()
