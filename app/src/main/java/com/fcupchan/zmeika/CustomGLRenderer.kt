@@ -41,7 +41,9 @@ class CustomGLRenderer : GLSurfaceView.Renderer{
 
         Matrix.multiplyMM(vPMatrix, 0, projectionMatrix, 0, viewMatrix, 0)
 
-        atChange()
+        if (Snake.isGameRunning){
+            atChange()
+        }
     }
 
     private fun atChange(){
@@ -49,6 +51,7 @@ class CustomGLRenderer : GLSurfaceView.Renderer{
         var needNewSegment = false
 
         if (frameSkipCounter == 20){
+
             Snake.segments.forEach{
 
                 when(it.direction){
@@ -69,7 +72,7 @@ class CustomGLRenderer : GLSurfaceView.Renderer{
 
                 it.draw(vPMatrix)
 
-                it.changeColor(floatArrayOf(1.0f, 1.0f, 1.0f, 1.0f))
+                //it.changeColor(floatArrayOf(1.0f, 1.0f, 1.0f, 1.0f))
             }
 
             if (needNewSegment){

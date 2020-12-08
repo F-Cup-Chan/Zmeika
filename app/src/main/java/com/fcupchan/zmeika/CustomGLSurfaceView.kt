@@ -54,8 +54,8 @@ class CustomGLSurfaceView(context: Context) : GLSurfaceView(context) {
             else -> {
                 if (!Snake.isGameRunning){
                     Snake.segments.clear()
-                    Snake.isGameRunning = true
                     Snake.segments.add(Segment(0f, 0f, 1f))
+                    Snake.isGameRunning = true
                 }
             }
         }

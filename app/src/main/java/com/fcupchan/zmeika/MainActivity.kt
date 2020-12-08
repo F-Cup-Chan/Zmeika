@@ -1,8 +1,10 @@
 package com.fcupchan.zmeika
 
 import android.opengl.GLSurfaceView
+import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Looper
 import android.view.Window
 import android.view.WindowManager
 import android.widget.TextView
@@ -24,5 +26,28 @@ class MainActivity : AppCompatActivity() {
         mainView = CustomGLSurfaceView(this)
 
         setContentView(mainView)
+
+        val checkThread = CheckThread()
+        checkThread.execute()
     }
+
+    fun showToast(num: Int){
+        Toast.makeText(this, "New amount of segments: $num", Toast.LENGTH_LONG).show()
+    }
+
+    inner class CheckThread : AsyncTask<Unit, Unit, Unit>(){
+
+        override fun doInBackground(vararg params: Unit?) {
+            Looper.prepare()
+            while (Snake.isGameRunning){
+                if (Snake.lastAmountOfSegments != Snake.segments.size){
+                    Snake.lastAmountOfSegments = Snake.segments.size
+                    showToast(Snake.lastAmountOfSegments)
+                }
+            }
+
+        }
+
+    }
+
 }

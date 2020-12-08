@@ -79,10 +79,8 @@ class Food {
         }
 
         fun drawFood(matrix: FloatArray) {
-            if (Snake.isGameRunning) {
-                triangle1.draw(matrix)
-                triangle2.draw(matrix)
-            }
+            triangle1.draw(matrix)
+            triangle2.draw(matrix)
         }
 
 

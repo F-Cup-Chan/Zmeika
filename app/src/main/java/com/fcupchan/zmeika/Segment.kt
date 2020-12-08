@@ -30,10 +30,8 @@ class Segment(positionX: Float, positionY: Float, positionZ: Float) {
     }
 
     fun draw(matrix: FloatArray) {
-        if (Snake.isGameRunning){
-            triangle1.draw(matrix)
-            triangle2.draw(matrix)
-        }
+        triangle1.draw(matrix)
+        triangle2.draw(matrix)
     }
 
     fun changePosition(positionX: Float, positionY: Float, positionZ: Float) {
