@@ -27,8 +27,6 @@ class MainActivity : AppCompatActivity() {
         mainView = CustomGLSurfaceView(this)
 
         setContentView(mainView)
-
-        ///////
     }
 
 }
