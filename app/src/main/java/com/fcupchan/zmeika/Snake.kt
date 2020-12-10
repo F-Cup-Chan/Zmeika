@@ -5,7 +5,7 @@ class Snake {
         private var counter = 0f
 
         var segments = arrayListOf<Segment>()
-        var lastAmountOfSegments = 1
+        var lastAmountOfSegments = 0
         //var direction: String = Direction.RIGHT.toString()
         var isGameRunning = true
 

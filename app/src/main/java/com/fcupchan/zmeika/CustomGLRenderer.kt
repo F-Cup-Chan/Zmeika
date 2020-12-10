@@ -3,6 +3,7 @@ package com.fcupchan.zmeika
 import android.opengl.GLES30
 import android.opengl.GLSurfaceView
 import android.opengl.Matrix
+import android.widget.Toast
 import java.math.BigDecimal
 import java.math.RoundingMode
 import javax.microedition.khronos.egl.EGLConfig
@@ -44,6 +45,7 @@ class CustomGLRenderer : GLSurfaceView.Renderer{
         if (Snake.isGameRunning){
             atChange()
         }
+
     }
 
     private fun atChange(){
