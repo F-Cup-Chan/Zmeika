@@ -1,17 +1,10 @@
 package com.fcupchan.zmeika
 
-import android.content.Context
 import android.opengl.GLSurfaceView
-import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Looper
 import android.view.Window
 import android.view.WindowManager
-import android.widget.TextView
-import android.widget.Toast
-import kotlin.properties.Delegates
-import kotlin.reflect.KProperty
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,7 +18,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         mainView = CustomGLSurfaceView(this)
-
 
         setContentView(mainView)
     }

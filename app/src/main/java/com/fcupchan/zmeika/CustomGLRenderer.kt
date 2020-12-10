@@ -6,12 +6,15 @@ import android.opengl.Matrix
 import android.widget.Toast
 import java.math.BigDecimal
 import java.math.RoundingMode
+import java.util.*
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
 private val vPMatrix = FloatArray(16)
 private val projectionMatrix = FloatArray(16)
 private val viewMatrix = FloatArray(16)
+private var needNewSegment: Boolean = false
+private var segmentAdded: Boolean = true
 
 
 
@@ -50,8 +53,6 @@ class CustomGLRenderer : GLSurfaceView.Renderer{
 
     private fun atChange(){
 
-        var needNewSegment = false
-
         if (frameSkipCounter == 20){
 
             Snake.segments.forEach{
@@ -68,18 +69,27 @@ class CustomGLRenderer : GLSurfaceView.Renderer{
                 val centerFoodX = BigDecimal.valueOf(Food.positionFoodX.toDouble()).setScale(1, RoundingMode.HALF_EVEN).toFloat()
                 val centerFoodY = BigDecimal.valueOf(Food.positionFoodY.toDouble()).setScale(1, RoundingMode.HALF_EVEN).toFloat()
 
-                if (centerX == centerFoodX && centerY == centerFoodY){
-                    needNewSegment = true
-                }
+                if (!needNewSegment) needNewSegment = centerX == centerFoodX && centerY == centerFoodY
 
                 it.draw(vPMatrix)
 
                 //it.changeColor(floatArrayOf(1.0f, 1.0f, 1.0f, 1.0f))
             }
 
-            if (needNewSegment){
+            if (!segmentAdded){
                 Snake.addSegment()
                 Food.createFood()
+                segmentAdded = true
+            }
+
+            if (needNewSegment){
+                Snake.rememberLastCoords()
+                segmentAdded = false
+                needNewSegment = false
+                Snake.segments.forEach(){
+                    val random = Random()
+                    it.changeColor(floatArrayOf(random.nextFloat(), random.nextFloat(), random.nextFloat(), 1.0f))
+                }
             }
 
             frameSkipCounter = 0
